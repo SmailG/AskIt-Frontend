@@ -1,4 +1,3 @@
-
 const BASE_URL = "http://localhost:3333/api/v1";
 
 const formatBody = (method, body) => {
@@ -45,11 +44,13 @@ export const auth = {
 
 export const questions = {
 	...crud("/question"),
-	getSingle: (id) => list(`${BASE_URL}/question/getQuesion/${id}`);
+	getSingle: (id) => get(`${BASE_URL}/question/getQuestion?id=${id}`),
+	getMultiple: (skip, take, criteria) => get(`${BASE_URL}/question/getQuestions?offset=${skip}&take=${take}&criteria=${criteria}`)
 }
 
 export const answers = {
-	...crud("/answer")
+	...crud("/answer"),
+	getSingle: (id) => get(`${BASE_URL}/question/getAnswer/${id}`)
 }
 
 export const user = {
