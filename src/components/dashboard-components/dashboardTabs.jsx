@@ -5,12 +5,16 @@ const DashboardTabs = ({ tabs, selectTab, selectedTab }) => {
 
     return (
         <div className="dashboard-tabs">
-            {tabs.map(tab => <TabItem
-            key={tab.id}
-            tab={tab}
-            selectTab={selectTab}
-            selectedTab={selectedTab}
-            />)}
+            {tabs.map(tab => {
+                if(tab.role === 'any') {
+                    return <TabItem
+                key={tab.id}
+                tab={tab}
+                selectTab={selectTab}
+                selectedTab={selectedTab}
+                />
+            }
+            })}
         </div>
     );
 }
