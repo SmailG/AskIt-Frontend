@@ -5,7 +5,33 @@
     background-position: center; 
     
 }
-/* 
-background: linear-gradient(
-        rgba(0, 0, 0, 0.7), 
-        rgba(0, 0, 0, 0.7)); */
+
+.content-container {
+    display: flex;
+    padding: 0 2em;
+}
+
+.sidebar {
+    flex-grow: 0.5;
+    width: 15%;
+    margin-left: 3.5em;
+    margin-right: 2em;
+    background: white;
+    height: fit-content;
+    padding: 2em;
+    margin-top: 11em;
+    border-radius: 20px; 
+}
+
+
+@media screen and (max-width: 930px) {
+    .content-container {
+        display: block;
+        padding: 0 2em;
+    }
+
+    .sidebar {
+        margin: 3em auto 0 auto;
+        width: 80%;
+    }
+} 

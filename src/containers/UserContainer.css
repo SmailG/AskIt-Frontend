@@ -1,0 +1,8 @@
+
+
+@media screen and (max-width: 930px) {
+    .user-container {
+        margin: 3em auto 0 auto;
+        width: 80%;
+    }
+} 

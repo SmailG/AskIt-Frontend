@@ -1,0 +1,13 @@
+.user-container {
+    width: 100% !important; 
+    height: 20em;
+    background: transparent !important;
+    box-shadow: none !important;
+ }
+ .user-details {
+     margin-bottom: 1.5em;
+ }
+ .user-data {
+     margin-top: .7em;
+     font-size: 1.1em;
+ }

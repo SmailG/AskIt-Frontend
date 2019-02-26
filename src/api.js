@@ -38,8 +38,8 @@ const crud = (path) => ({
 });
 
 export const auth = {
-	login: (data) => post(`${BASE_URL}/measurements/deviceuser`, data),
-	register: (data) => post(`${BASE_URL}/measurements/deviceuser`, data) 
+	login: (data) => post(`${BASE_URL}/auth/login`, data),
+	register: (data) => post(`${BASE_URL}/auth/register`, data) 
 }
 
 export const questions = {
@@ -54,6 +54,7 @@ export const answers = {
 }
 
 export const user = {
-	...crud("/user")
+	...crud("/user"),
+	changePassword: (data) => post(`${BASE_URL}/user/reset-password`, data) 
 }
 

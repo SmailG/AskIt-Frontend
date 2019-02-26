@@ -23,14 +23,10 @@
     text-align: center;
 }
 
-.content-container {
-    display: flex;
-}
-
 .question-overview {
     margin-left: 4em;
     margin-top: 11em;
-    width: 85%;
+    flex-grow: 2;
 }
 
     /* DASHBOARD TABS */
@@ -93,4 +89,8 @@
 
 .load-more {
     margin: 0 auto 0 auto !important;
+}
+    /* LOGIN AND REGISTER FORMS */
+.register-button {
+    cursor: pointer;
 }

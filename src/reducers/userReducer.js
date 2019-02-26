@@ -1,26 +1,32 @@
 const initalState = {
 	request: { pending: false, error: false, fulfilled: false },
-	user: {}
+	token: localStorage.getItem('token'),
+	user: JSON.parse(localStorage.getItem('user')),
+	error: ''
 };
 
 export default function reducer (state = initalState, action) {
 	switch (action.type) {
-		case 'GET_MARKERS':
-		break;
-		case 'GET_USER_PENDING':
+		case 'CHANGE_USER_PASSWORD_PENDING':
 			return {
 				...state,
 				request: { ...state.request, pending: true, error: false, fulfilled: false }
 			};
-		case 'GET_USER_REJECTED':
+		case 'CHANGE_USER_PASSWORD_REJECTED':
 			return {
 				...state,
-				request: { ...state.request, pending: false, error: true, fulfilled: false }
+				request: { ...state.request, pending: false, error: true, fulfilled: false },
+				error: action.payload.message
 			};
-		case 'GET_USER_FULFILLED':
+		case 'CHANGE_USER_PASSWORD_FULFILLED':
 			return {
 				...state,
 				request: { ...state.request, pending: false, error: false, fulfilled: true },
+				user: action.payload
+			}
+		case 'SET_USER':
+			return {
+				...state,
 				user: action.payload
 			}
 		default:

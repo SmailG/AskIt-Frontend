@@ -1,0 +1,7 @@
+.dimmed.dimmable > .ui.modals.dimmer.visible {
+    display: flex !important;
+  }
+
+.ui.tiny.modal.transition.visible.active  {
+   top: 20% !important;
+}

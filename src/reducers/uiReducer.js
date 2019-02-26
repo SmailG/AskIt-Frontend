@@ -8,7 +8,9 @@ const initalState = {
         { id: 3, title: "Most answered", criteria: CONSTANTS.TABS.TAB_ACTION_MOST_ANSWERED, role: 'any' },
         { id: 4, title: "My questions", role: 'user' },
     ],
-    selectedTab: {}
+    selectedTab: {},
+    sidebarMode: "login",
+    isModalOpen: false
 };
 
 export default function reducer (state = initalState, action) {
@@ -36,6 +38,16 @@ export default function reducer (state = initalState, action) {
                     ...state,
                     request: { ...state.request, pending: false, error: false, fulfilled: true },
                     selectedTab: action.payload
+                }
+            case 'SWITCH_SIDEBAR_MODE':
+                return {
+                    ...state,
+                    sidebarMode: action.payload
+                }
+            case 'OPEN_MODAL':
+                return {
+                    ...state,
+                    isModalOpen: action.payload,
                 }
 
             default:

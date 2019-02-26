@@ -4,12 +4,19 @@ import './DashboardContainer.css';
 import AskQuestion from '../components/dashboard-components/askQuestion.jsx';
 import QuestionOverview from '../components/dashboard-components/questionOverview.jsx';
 import UserContainer from './UserContainer.jsx';
-import LoginForm from '../components/login/loginForm.jsx';
+import AuthContainer from './AuthContainer.jsx'
+import ModalContainer from './ModalContainer.jsx';
 import {
 	getQuestions,
-	getMoreQuestions,
 	selectTab,
-	loadMoreQuestions
+	loadMoreQuestions,
+	switchSidebarMode,
+	askQuestion,
+	openModal,
+	login,
+	register,
+	updateAuthData,
+	setAuthError
 } from '../actions';
 
 
@@ -19,8 +26,13 @@ const mapStateToProps = (state, ownProps) => {
 		selectedTab: state.ui.selectedTab,
 		uiState: state.ui.request,
 		questions: state.questions.data,
-		hasToken: localStorage.getItem('token'),
-		hasMoreQuestions: state.questions.hasMore
+		token: localStorage.getItem('token'),
+		hasMoreQuestions: state.questions.hasMore,
+		sidebarMode: state.ui.sidebarMode,
+		user: state.user.user,
+		isModalOpen: state.ui.isModalOpen,
+		authData: state.auth.authData,
+		authError: state.auth.errorMessage
 	}
 }
 
@@ -28,7 +40,14 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
 		loadMoreQuestions: (skip, take, criteria) => dispatch(loadMoreQuestions(skip, take, criteria)),
 		getQuestions: (skip, take, criteria) => dispatch(getQuestions(skip, take, criteria)),
-		selectTab: (tab) => dispatch(selectTab(tab))
+		selectTab: (tab) => dispatch(selectTab(tab)),
+		switchSidebarMode: (mode) => dispatch(switchSidebarMode(mode)),
+		askQuestion: (content) => dispatch(askQuestion(content)),
+		openModal: (mode) => dispatch(openModal(mode)) ,
+		updateAuthData: (name, value) => dispatch(updateAuthData(name, value)),
+		login: (data) => dispatch(login(data)),
+		register: (data) => dispatch(register(data)),
+		setAuthError: (error) => dispatch(setAuthError(error))   
 	}
 }
 
@@ -36,6 +55,12 @@ class DashboardContainer extends Component {
 
 	componentDidMount () {
 		this.selectTab(this.props.dashboardTabs[0]);
+	}
+
+	askQuestion = (content) => {
+		this.props.token ?
+		this.props.askQuestion(content, this.props.user.userId)
+		: this.props.openModal(true);
 	}
 
 	selectTab = (tab) => {
@@ -50,11 +75,14 @@ class DashboardContainer extends Component {
 			dashboardTabs,
 			selectedTab,
 			questions,
-			hasMoreQuestions } = this.props;
+			hasMoreQuestions,
+			isModalOpen,
+			token
+			 } = this.props;
 
 			return (
 			 <div className="container">
-				<AskQuestion />
+				<AskQuestion askQuestion={this.askQuestion} />
 				<div className="content-container">
 					<QuestionOverview
 						tabs={dashboardTabs}
@@ -64,11 +92,14 @@ class DashboardContainer extends Component {
 						loadMore={this.props.loadMoreQuestions}
 						hasMoreQuestions={hasMoreQuestions}
 						/>
-					{ true ?
-						<UserContainer />
-						: <LoginForm></LoginForm>
-					}
+					<div className="sidebar">
+						{ token ?
+							<UserContainer />
+							: <AuthContainer />
+						}
+					</div>
 				</div>
+				<ModalContainer isOpen={isModalOpen} />
 			 </div>
 
 		);
