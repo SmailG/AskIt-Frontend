@@ -1,25 +1,25 @@
 const initalState = {
 	request: { pending: false, error: false, fulfilled: false },
-	user: {}
+	data: []
 };
 
 export default function reducer (state = initalState, action) {
 	switch (action.type) {
-		case 'LOG_IN_PENDING':
+		case 'GET_ANSWERS_PENDING':
 			return {
 				...state,
 				request: { ...state.request, pending: true, error: false, fulfilled: false }
 			};
-		case 'LOG_IN_PREJECTED':
+		case 'GET_ANSWERS_PREJECTED':
 			return {
 				...state,
 				request: { ...state.request, pending: false, error: true, fulfilled: false }
 			};
-		case 'LOG_IN_PFULFILLED':
+		case 'GET_ANSWERS_PFULFILLED':
 			return {
 				...state,
 				request: { ...state.request, pending: false, error: false, fulfilled: true },
-				user: action.payload
+				data: action.payload
             }
 		default:
 			return state;

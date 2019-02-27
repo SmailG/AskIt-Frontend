@@ -52,14 +52,25 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 class DashboardContainer extends Component {
 
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			question: ''
+		}
+	}
+
 	componentDidMount () {
 		this.selectTab(this.props.dashboardTabs[0]);
 	}
 
-	askQuestion = (content) => {
-		this.props.token ?
-		this.props.askQuestion(content, this.props.user.userId)
-		: this.props.openModal(true);
+	askQuestion = () => {
+		if(this.props.token ) {
+			this.props.askQuestion(this.state.question, this.props.user.userId);
+			this.setState({ question: '' })
+		} else {
+			this.props.openModal(true);
+		}
 	}
 
 	selectTab = (tab) => {
@@ -67,6 +78,10 @@ class DashboardContainer extends Component {
 		this.props.selectTab(tab);
 		const questionList = document.getElementsByClassName('question-list')[0];
 		questionList.scrollTop = 0;
+	}
+
+	changeHandler = (e) => {
+		this.setState({question: e.target.value})
 	}
 
 	render () {
@@ -81,7 +96,7 @@ class DashboardContainer extends Component {
 
 			return (
 			 <div className="container">
-				<AskQuestion askQuestion={this.askQuestion} />
+				<AskQuestion value={this.state.question} askQuestion={this.askQuestion} changeHandler={this.changeHandler} />
 				<div className="content-container">
 					<QuestionOverview
 						tabs={dashboardTabs}

@@ -44,14 +44,14 @@ export const auth = {
 
 export const questions = {
 	...crud("/question"),
-	getSingle: (id) => get(`${BASE_URL}/question/getQuestion?id=${id}`),
+	getSingle: (id) => get(`${BASE_URL}/question?id=${id}`),
 	getMultiple: (skip, take, criteria) => get(`${BASE_URL}/question/getQuestions?offset=${skip}&take=${take}&criteria=${criteria}`),
 	vote: (data) => put(`${BASE_URL}/question/vote`, data) 
 }
 
 export const answers = {
 	...crud("/answer"),
-	getSingle: (id) => get(`${BASE_URL}/question/getAnswer/${id}`)
+	getAnswers: (id) => get(`${BASE_URL}/answer/getAnswers?id=${id}`)
 }
 
 export const user = {

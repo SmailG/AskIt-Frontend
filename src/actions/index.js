@@ -126,3 +126,12 @@ export const downvoteQuestion = (questionId, userId) => {
         payload: res
     }
 }
+
+export const getAnswers = (id) => {
+    const res = answers.getAnswers(id)
+
+    return {
+        type: 'GET_ANSWERS',
+        payload: res
+    }
+}

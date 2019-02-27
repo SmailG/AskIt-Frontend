@@ -3,12 +3,13 @@ import {
 	logOut,
 	setUser,
 	switchSidebarMode,
-	openModal } from "../actions";
+	openModal, 
+	getOneQuestion,
+	getQuestions} from "../actions";
 
 
 
 const askItMiddleWare = store => next => (action) => {
-	console.log(action.type)
 	if (action.type === 'GET_QUESTIONS_FULFILLED') {
 		if(action.payload.length) {
             action.payload = sortQustions(action.payload, store.getState().ui.selectedTab.criteria);
@@ -31,8 +32,11 @@ const askItMiddleWare = store => next => (action) => {
 	} else if(action.type === 'REGISTER_FULFILLED') {
 		store.dispatch(openModal(false));
 		store.dispatch(switchSidebarMode('login'))
-	} 
-	
+	} else if (action.type === 'QUESTION_VOTE_FULFILLED') {
+		store.dispatch(getOneQuestion(store.getState().questions.openQuestion.questionId))
+	} else if (action.type === 'CREATE_QUESTION_FULFILLED') {
+		store.dispatch(getQuestions(0, 20, store.getState().ui.selectedTab.criteria))
+	}
 
 	next(action);
 };
