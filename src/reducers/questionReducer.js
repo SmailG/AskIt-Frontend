@@ -1,7 +1,8 @@
 const initalState = {
 	request: { pending: false, error: false, fulfilled: false },
 	hasMore: true,
-	data: []
+	data: [],
+	openQuestion: {}
 };
 
 export default function reducer (state = initalState, action) {
@@ -42,6 +43,39 @@ export default function reducer (state = initalState, action) {
 				request: { ...state.request, pending: false, error: false, fulfilled: true },
 				data: action.payload
 			}
+		case 'GET_SINGLE_QUESTION_PENDING':
+			return {
+				...state,
+				request: { ...state.request, pending: true, error: false, fulfilled: false }
+			};
+		case 'GET_SINGLE_QUESTION_REJECTED':
+			return {
+				...state,
+				request: { ...state.request, pending: false, error: true, fulfilled: false },
+			};
+		case 'GET_SINGLE_QUESTION_FULFILLED':
+			return {
+				...state,
+				request: { ...state.request, pending: false, error: false, fulfilled: true },
+				openQuestion: action.payload
+			}
+			case 'QUESTION_VOTE_PENDING':
+			return {
+				...state,
+				request: { ...state.request, pending: true, error: false, fulfilled: false }
+			};
+		case 'QUESTION_VOTE_REJECTED':
+			return {
+				...state,
+				request: { ...state.request, pending: false, error: true, fulfilled: false },
+			};
+		case 'QUESTION_VOTE_FULFILLED':
+			return {
+				...state,
+				request: { ...state.request, pending: false, error: false, fulfilled: true },
+				openQuestion: action.payload
+			}
+		
 
 		default:
 			return state;

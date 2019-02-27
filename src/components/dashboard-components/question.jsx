@@ -1,11 +1,12 @@
 import './style.css';
+import { Link } from 'react-router-dom';
 import React, { Component }  from 'react';
 import { Icon,  Card } from 'semantic-ui-react'
 
 const Question = ({ question }) => {
 
-
     return (
+        <Link to={`/question/${question.questionId}`}>
         <Card raised className="question-card">
             <Card.Content header={question.content} />
             <Card.Content extra>
@@ -23,6 +24,7 @@ const Question = ({ question }) => {
                 </span>
             </Card.Content>
         </Card>
+    </Link>  
     );
 }
 

@@ -5,7 +5,6 @@ import AskQuestion from '../components/dashboard-components/askQuestion.jsx';
 import QuestionOverview from '../components/dashboard-components/questionOverview.jsx';
 import UserContainer from './UserContainer.jsx';
 import AuthContainer from './AuthContainer.jsx'
-import ModalContainer from './ModalContainer.jsx';
 import {
 	getQuestions,
 	selectTab,
@@ -99,7 +98,6 @@ class DashboardContainer extends Component {
 						}
 					</div>
 				</div>
-				<ModalContainer isOpen={isModalOpen} />
 			 </div>
 
 		);

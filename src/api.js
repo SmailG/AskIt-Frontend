@@ -45,7 +45,8 @@ export const auth = {
 export const questions = {
 	...crud("/question"),
 	getSingle: (id) => get(`${BASE_URL}/question/getQuestion?id=${id}`),
-	getMultiple: (skip, take, criteria) => get(`${BASE_URL}/question/getQuestions?offset=${skip}&take=${take}&criteria=${criteria}`)
+	getMultiple: (skip, take, criteria) => get(`${BASE_URL}/question/getQuestions?offset=${skip}&take=${take}&criteria=${criteria}`),
+	vote: (data) => put(`${BASE_URL}/question/vote`, data) 
 }
 
 export const answers = {

@@ -65,7 +65,7 @@ export const loadMoreQuestions = (skip, take, criteria) => {
 }
 
 export const getOneQuestion = (id) => {
-    const res = questions.getMultiple(id);
+    const res = questions.getSingle(id);
 
     return {
     type: 'GET_SINGLE_QUESTION',
@@ -109,3 +109,20 @@ export const changePassword = (oldPassword, newPassword, email) => {
     }
 }
 
+export const upvoteQuestion = (questionId, userId) => {
+    const res = questions.vote({ questionId, userId, vote: 'upvote' })
+
+    return {
+        type: 'QUESTION_VOTE',
+        payload: res
+    }
+}
+
+export const downvoteQuestion = (questionId, userId) => {
+    const res = questions.vote({ questionId, userId, vote: 'downvote' })
+
+    return {
+        type: 'QUESTION_VOTE',
+        payload: res
+    }
+}

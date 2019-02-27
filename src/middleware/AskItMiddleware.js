@@ -31,10 +31,11 @@ const askItMiddleWare = store => next => (action) => {
 	} else if(action.type === 'REGISTER_FULFILLED') {
 		store.dispatch(openModal(false));
 		store.dispatch(switchSidebarMode('login'))
-	}
+	} 
 	
 
 	next(action);
 };
 
 export default askItMiddleWare;
+

@@ -21,7 +21,8 @@ const mapStateToProps = (state, ownProps) => {
 		sidebarMode: state.ui.sidebarMode,
 		user: state.user.user,
     popupMode: state.ui.popupMode,
-    authData: state.auth.authData
+    authData: state.auth.authData,
+    isOpen: state.ui.isModalOpen
 	}
 }
 
