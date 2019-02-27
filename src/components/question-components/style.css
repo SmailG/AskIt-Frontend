@@ -1,0 +1,27 @@
+.answer {
+    padding: .3em 1em !important;
+    width: 50% !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.answer * {
+    color: white !important;
+}
+
+.submit-answer {
+    padding: 1em;
+    margin-left: 1em;
+    margin-top: 20em;
+    margin-bottom: 10em;
+}
+
+.submit-answer-text {
+    color: white;
+}
+
+.submit-answer-btn {
+    position: relative;
+    left: -6em;
+    top: 3em;
+}

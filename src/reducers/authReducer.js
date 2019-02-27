@@ -34,7 +34,7 @@ export default function reducer (state = initalState, action) {
 				...state,
 				request: { ...state.request, pending: true, error: false, fulfilled: false }
 			};
-		case 'REGISTER_PREJECTED':
+		case 'REGISTER_REJECTED':
 			return {
 				...state,
 				request: { ...state.request, pending: false, error: true, fulfilled: false }

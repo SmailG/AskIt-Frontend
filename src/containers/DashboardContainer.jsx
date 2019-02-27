@@ -107,10 +107,7 @@ class DashboardContainer extends Component {
 						hasMoreQuestions={hasMoreQuestions}
 						/>
 					<div className="sidebar">
-						{ token ?
-							<UserContainer />
-							: <AuthContainer />
-						}
+						{ token ? <UserContainer /> : <AuthContainer /> }
 					</div>
 				</div>
 			 </div>

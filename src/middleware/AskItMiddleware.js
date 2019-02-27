@@ -5,7 +5,8 @@ import {
 	switchSidebarMode,
 	openModal, 
 	getOneQuestion,
-	getQuestions} from "../actions";
+	getQuestions,
+	getAnswers} from "../actions";
 
 
 
@@ -36,6 +37,10 @@ const askItMiddleWare = store => next => (action) => {
 		store.dispatch(getOneQuestion(store.getState().questions.openQuestion.questionId))
 	} else if (action.type === 'CREATE_QUESTION_FULFILLED') {
 		store.dispatch(getQuestions(0, 20, store.getState().ui.selectedTab.criteria))
+	} else if (action.type === 'ANSWER_VOTE_FULFILLED') {
+		store.dispatch(getAnswers(store.getState().questions.openQuestion.questionId))
+	} else if (action.type === 'CREATE_ANSWER_FULFILLED') {
+		store.dispatch(getAnswers(store.getState().questions.openQuestion.questionId))
 	}
 
 	next(action);

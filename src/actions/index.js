@@ -127,11 +127,38 @@ export const downvoteQuestion = (questionId, userId) => {
     }
 }
 
+export const upvoteAnswer = (answerId, userId) => {
+    const res = answers.vote({ answerId, userId, vote: 'upvote' })
+
+    return {
+        type: 'ANSWER_VOTE',
+        payload: res
+    }
+}
+
+export const downvoteAnswer = (answerId, userId) => {
+    const res = answers.vote({ answerId, userId, vote: 'downvote' })
+
+    return {
+        type: 'ANSWER_VOTE',
+        payload: res
+    }
+}
+
 export const getAnswers = (id) => {
     const res = answers.getAnswers(id)
 
     return {
         type: 'GET_ANSWERS',
+        payload: res
+    }
+}
+
+export const submitAnswer = (user, question, content) => {
+    const res = answers.create({user, question, content})
+
+    return {
+        type: 'CREATE_ANSWER',
         payload: res
     }
 }

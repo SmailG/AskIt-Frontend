@@ -8,11 +8,16 @@ import {
     upvoteQuestion,
     downvoteQuestion,
     openModal,
-    getAnswers
+    getAnswers,
+    downvoteAnswer,
+    upvoteAnswer,
+    submitAnswer
 } from '../actions/index';
+import Link from 'react-router-dom/Link';
 
 const mapStateToProps = (state, ownProps) => {
-	return {
+
+    return {
         question: state.questions.openQuestion,
         token: localStorage.getItem('token'),
         user: state.user.user,
@@ -26,11 +31,22 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
         downvoteQuestion: (id, userId) => dispatch(downvoteQuestion(id, userId)),
         upvoteQuestion: (id, userId) => dispatch(upvoteQuestion(id, userId)),
+        downvoteAnswer: (id, userId) => dispatch(downvoteAnswer(id, userId)),
+        upvoteAnswer: (id, userId) => dispatch(upvoteAnswer(id, userId)),
         openModal: (isOpen) => dispatch(openModal(isOpen)),
+        submitAnswer: (userId, questionId, answer) => dispatch(submitAnswer(userId, questionId, answer))
 	}
 }
 
 class QuestionContainer extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            answer: ''
+        }
+    }
 
     questionVoteHandler = (vote) => {
         this.props.token
@@ -43,25 +59,30 @@ class QuestionContainer extends Component {
     answerVoteHandler = (id, vote) => {
         this.props.token
         ? vote
-        ? this.props.upvoteAnswer(this.props.question.id, this.props.user.userId)
-        : this.props.downvoteAnswer(this.props.question.id, this.props.user.userId)
+        ? this.props.upvoteAnswer(id, this.props.user.userId)
+        : this.props.downvoteAnswer(id, this.props.user.userId)
         : this.props.openModal(true)
     }
 
-    submitAnswer = () => {
+    handleChange = (e) => {
+        this.setState({ answer: e.target.value });
+    } 
 
+    submitAnswer = () => {
+        this.props.submitAnswer(this.props.user.userId, this.props.question.questionId, this.state.answer);
+        this.setState({ answer: '' })
     }
 
     render () {
         const { question, downvoteQuestion, upvoteQuestion, user, token, questionAnswers } = this.props;
         const hasUpvoted = question.upvoters && question.upvoters.filter( u => u.userId === user.userId).length > 0;
         const hasDownvoted = question.upvoters && question.downvoters.filter( u => u.userId === user.userId).length > 0;
-
+        console.log(questionAnswers);
         return (
             <div className="question-container">
                 { question.questionId && 
                 <div className="question">
-                {console.log(question)}
+                <Link to={`/`}><Icon name="angle left"></Icon><span className="back-text">Back</span></Link>
                 <Card raised className="single-question-content">
                         <Card.Content className="question-content" header={question.content} />
                         <Card.Content extra className="question-actions">
@@ -76,7 +97,14 @@ class QuestionContainer extends Component {
                     </Card.Content>
                 </Card>
                 {questionAnswers &&
-                 <AnswerList token={token} voteHandler={this.answerVoteHandler} answers={questionAnswers} user={user} submitAnswer={this.submitAnswer} />
+                 <AnswerList
+                    token={token}
+                    voteHandler={this.answerVoteHandler}
+                    answers={questionAnswers}
+                    user={user}
+                    handleChange={this.handleChange}
+                    answerVal={this.state.answer}
+                    submitAnswer={this.submitAnswer} />
                 }
                 </div>
                 }

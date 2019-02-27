@@ -51,7 +51,8 @@ export const questions = {
 
 export const answers = {
 	...crud("/answer"),
-	getAnswers: (id) => get(`${BASE_URL}/answer/getAnswers?id=${id}`)
+	getAnswers: (id) => get(`${BASE_URL}/answer/getAnswers?id=${id}`),
+	vote: (data) => put(`${BASE_URL}/answer/vote`, data) 
 }
 
 export const user = {

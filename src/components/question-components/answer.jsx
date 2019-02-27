@@ -17,20 +17,20 @@ const Answer = ({ answer, voteHandler, user }) => {
     const hasDownvoted = answer.upvoters && answer.downvoters.filter( u => u.userId === user.userId).length > 0;
 
     return (
-        <div className="answer">
-        <Card raised className="single-question-content">
-                        <Card.Content className="question-content" header={answer.content} />
-                        <Card.Content extra className="question-actions">
-                            <span className="action" onClick={upvote}>
-                                <Icon name={hasUpvoted ? 'thumbs up' : 'thumbs up outline'} />
-                                {answer.upvoters.length + " likes"}
-                            </span>
-                            <span className="action" onClick={downvote}>
-                                <Icon name={hasDownvoted ? 'thumbs down' : 'thumbs down outline'} />
-                                {answer.downvoters.length + " dislikes"}
-                            </span>
-                    </Card.Content>
-                </Card>
+        <div className="answer-container">
+            <Card raised className="answer">
+                <Card.Content className="answer-content" header={answer.content} />
+                <Card.Content extra className="question-actions">
+                    <span className="action" onClick={upvote}>
+                        <Icon name={hasUpvoted ? 'thumbs up' : 'thumbs up outline'} />
+                        {answer.upvoters.length + " likes"}
+                    </span>
+                    <span className="action" onClick={downvote}>
+                        <Icon name={hasDownvoted ? 'thumbs down' : 'thumbs down outline'} />
+                        {answer.downvoters.length + " dislikes"}
+                    </span>
+                </Card.Content>
+            </Card>
         </div>
     ); 
 }
