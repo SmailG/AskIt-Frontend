@@ -41,11 +41,11 @@ class App extends Component {
     return (
 		<Provider store={store}>
       <Router>
-        <div>
+        <React.Fragment>
           <PublicRoute exact path="/" component={DashboardContainer} />
           <PublicRoute path="/" component={ModalContainer} />
           <PublicRoute path="/question/:id" component={QuestionContainer} />
-        </div>
+        </React.Fragment>
 			{/* <DashboardContainer /> */}
       </Router>
 		</Provider>

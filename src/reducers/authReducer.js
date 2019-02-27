@@ -19,7 +19,7 @@ export default function reducer (state = initalState, action) {
 			return {
 				...state,
 				request: { ...state.request, pending: false, error: true, fulfilled: false },
-				errorMessage: action.payload.message
+				errorMessage: action.payload.message.error ? action.payload.message.error : action.payload.message 
 			};
 		case 'LOG_IN_FULFILLED':
 			localStorage.setItem('token', action.payload.token)
