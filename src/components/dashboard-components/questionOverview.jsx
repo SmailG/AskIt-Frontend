@@ -9,7 +9,8 @@ const QuestionOverview = ({
     selectedTab,
     questions,
     loadMore,
-    hasMoreQuestions
+    hasMoreQuestions,
+    token
 }) => {
 
     const handleClick = () => {
@@ -19,6 +20,7 @@ const QuestionOverview = ({
 return (
         <div className="question-overview">
             <DashboardTabs
+                token={token}
                 tabs={tabs}
                 selectTab={selectTab}
                 selectedTab={selectedTab}

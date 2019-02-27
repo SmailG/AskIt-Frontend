@@ -75,8 +75,8 @@ class QuestionContainer extends Component {
 
     render () {
         const { question, downvoteQuestion, upvoteQuestion, user, token, questionAnswers } = this.props;
-        const hasUpvoted = question.upvoters && question.upvoters.filter( u => u.userId === user.userId).length > 0;
-        const hasDownvoted = question.upvoters && question.downvoters.filter( u => u.userId === user.userId).length > 0;
+        const hasUpvoted = user && question.upvoters && question.upvoters.filter( u => u.userId === user.userId).length > 0;
+        const hasDownvoted = user && question.upvoters && question.downvoters.filter( u => u.userId === user.userId).length > 0;
         console.log(questionAnswers);
         return (
             <div className="question-container">

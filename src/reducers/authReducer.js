@@ -60,7 +60,7 @@ export default function reducer (state = initalState, action) {
 		case 'SET_ERROR':
 			return {
 				...state,
-				errorMessage: action.payload
+				errorMessage: action.payload 
 			}
 		case 'LOG_OUT':
 			return {

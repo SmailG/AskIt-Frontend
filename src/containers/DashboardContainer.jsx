@@ -15,7 +15,8 @@ import {
 	login,
 	register,
 	updateAuthData,
-	setAuthError
+	setAuthError,
+	getUserQuestions
 } from '../actions';
 
 
@@ -46,7 +47,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		updateAuthData: (name, value) => dispatch(updateAuthData(name, value)),
 		login: (data) => dispatch(login(data)),
 		register: (data) => dispatch(register(data)),
-		setAuthError: (error) => dispatch(setAuthError(error))   
+		setAuthError: (error) => dispatch(setAuthError(error)),
+		getUserQuestions: (skip, take, id) => dispatch(getUserQuestions(skip, take, id))
 	}
 }
 
@@ -74,6 +76,9 @@ class DashboardContainer extends Component {
 	}
 
 	selectTab = (tab) => {
+		if(tab.criteria === 'my-questions') {
+			this.props.getUserQuestions(0, 20, this.props.user.userId);
+		} else
 		this.props.getQuestions(0, 20, tab.criteria);
 		this.props.selectTab(tab);
 		const questionList = document.getElementsByClassName('question-list')[0];
@@ -105,6 +110,7 @@ class DashboardContainer extends Component {
 						questions={questions}
 						loadMore={this.props.loadMoreQuestions}
 						hasMoreQuestions={hasMoreQuestions}
+						token={token}
 						/>
 					<div className="sidebar">
 						{ token ? <UserContainer /> : <AuthContainer /> }

@@ -13,6 +13,7 @@ import {
 
 
 const mapStateToProps = (state, ownProps) => {
+	console.log(state.auth.errorMessage, 'log')
 	return {
 		sidebarMode: ownProps.mode ? ownProps.mode : state.ui.sidebarMode,
 		authData: state.auth.authData,

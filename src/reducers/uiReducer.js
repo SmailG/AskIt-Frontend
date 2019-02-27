@@ -6,7 +6,7 @@ const initalState = {
         { id: 1, title: "Most recent", criteria: CONSTANTS.TABS.TAB_ACTION_MOST_RECENT, role: 'any' },
         { id: 2, title: "Most upvoted", criteria: CONSTANTS.TABS.TAB_ACTION_MOST_UPVOTED, role: 'any' },
         { id: 3, title: "Most answered", criteria: CONSTANTS.TABS.TAB_ACTION_MOST_ANSWERED, role: 'any' },
-        { id: 4, title: "My questions", role: 'user' },
+        { id: 4, title: "My questions", role: 'user', criteria: 'my-questions' },
     ],
     selectedTab: {},
     sidebarMode: "login",

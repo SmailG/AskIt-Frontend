@@ -46,6 +46,7 @@ export const questions = {
 	...crud("/question"),
 	getSingle: (id) => get(`${BASE_URL}/question?id=${id}`),
 	getMultiple: (skip, take, criteria) => get(`${BASE_URL}/question/getQuestions?offset=${skip}&take=${take}&criteria=${criteria}`),
+	getUserQuestions: (skip, take, id) => get(`${BASE_URL}/question/getUserQuestions?skip=${skip}&take=${take}&id=${id}`),
 	vote: (data) => put(`${BASE_URL}/question/vote`, data) 
 }
 

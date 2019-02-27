@@ -162,3 +162,12 @@ export const submitAnswer = (user, question, content) => {
         payload: res
     }
 }
+
+export const getUserQuestions = (skip, take, id) => {
+    const res = questions.getUserQuestions(skip, take, id)
+
+    return {
+        type: 'GET_QUESTIONS',
+        payload: res
+    }
+}
